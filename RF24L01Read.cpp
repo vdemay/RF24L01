@@ -71,7 +71,7 @@ void loop(void)
 
                 char outBuffer[1024]="?1=1";
                 char temp[5];
-                val = 0;
+                int val = 0;
                 if ((p.type & TEMPERATURE) == TEMPERATURE) { 
                         strcat(outBuffer,"&temperature=");
                         sprintf(temp, "%3.2f", p.val[val++]);

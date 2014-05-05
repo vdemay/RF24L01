@@ -1,6 +1,6 @@
 #include <cstdlib>
 #include <iostream>
-#include "RF24/librf24-rpi/librf24/RF24.h"
+#include "./RF24/librf24-rpi/librf24/RF24.h"
 
 using namespace std;
 
@@ -80,4 +80,13 @@ void loop(void)
         if ( pipe > 5 ) pipe = 0;
         
         usleep(20);
+}
+
+int main(int argc, char** argv) 
+{
+        setup();
+        while(1)
+                loop();
+        
+        return 0;
 }

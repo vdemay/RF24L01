@@ -93,7 +93,7 @@ void loop(char* serveur)
                 radio.read( &p, sizeof(p) );
 
                 char temp[5];
-                
+
                 char outBuffer[1024]="";
                 strcat(outBuffer, serveur);
                 strcat(outBuffer, "?id=");
@@ -142,10 +142,14 @@ void loop(char* serveur)
 
 int main(int argc, char** argv) 
 {
+        if (argc <= 1)
+        {
+                cout << "Usage: " << argv[0] << " <Serveur>" << endl;
+                exit(1);
+        }
         setup();
-        string server=cmd_line.get_arg("-s");
         while(1)
-                loop(server.c_str());
+                loop(argv[1]);
         
         return 0;
 }

@@ -22,8 +22,8 @@ enum TYPES {
 
 //DATA
 typedef struct {
-  int id;
-  int type;
+  int16_t id;
+  int16_t type;
   float val1;
   float val2;
   float val3;
@@ -72,7 +72,7 @@ void loop(void)
                 uint8_t len = radio.getDynamicPayloadSize();
                 radio.read( &p, sizeof(p) );
 
-                int type = p.type;
+                int16_t type = p.type;
 
                 // Display it on screen
                 printf("Recv: size=%i pipe=%i type=%d address=%d",len,pipe,type,p.id);

@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <iostream>
+#include <curl/curl.h>
 #include "./RF24/librf24-rpi/librf24/RF24.h"
 
 using namespace std;
@@ -17,7 +18,7 @@ enum TYPES {
   TEMPERATURE   = 0x01,
   HUMIDITY      = 0x02,
   CURRENT       = 0x04,
-  LUMINOSIRTY   = 0x08,
+  LUMINOSITY   = 0x08,
 };
 
 //DATA
@@ -58,7 +59,29 @@ void setup(void)
         usleep(1000);
 }
 
-void loop(void)
+void sendToServer(char* str) 
+{
+  CURL *curl;
+  CURLcode res;
+ 
+  curl = curl_easy_init();
+  if(curl) {
+    curl_easy_setopt(curl, CURLOPT_URL, str);
+    /* example.com is redirected, so we tell libcurl to follow redirection */ 
+    curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+ 
+    /* Perform the request, res will get the return code */ 
+    res = curl_easy_perform(curl);
+    /* Check for errors */ 
+    if(res != CURLE_OK)
+      fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+ 
+    /* always cleanup */ 
+    curl_easy_cleanup(curl);
+  }
+}
+
+void loop(char* serveur)
 {
         char receivePayload[32];
         uint8_t pipe = 0;
@@ -69,7 +92,11 @@ void loop(void)
                 uint8_t len = radio.getDynamicPayloadSize();
                 radio.read( &p, sizeof(p) );
 
-                char outBuffer[1024]="?1=1";
+                char outBuffer[1024]="";
+                strcat(outBuffer, serveur);
+                strcat(outBuffer, "?id=");
+                sprintf(temp, "%d", p.id);
+                strcat(outBuffer, temp);
                 char temp[5];
                 int val = 0;
                 if ((p.type & TEMPERATURE) == TEMPERATURE) { 
@@ -115,8 +142,9 @@ void loop(void)
 int main(int argc, char** argv) 
 {
         setup();
+        string server=cmd_line.get_arg("-s");
         while(1)
-                loop();
+                loop(server.c_str());
         
         return 0;
 }

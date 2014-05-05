@@ -78,7 +78,7 @@ void loop(void)
                 }
 
                 // Display it on screen
-                printf("Recv: size=%i pipe=%i type=%d address=%d temperature=%.2f",len,pipe,type,p.id,p.temperature);
+                printf("Recv: size=%i pipe=%i type=%d address=%d temperature=%.2f",len,pipe,type,p.id,p.val1);
 
                 // Send back payload to sender
                 radio.stopListening();

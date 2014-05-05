@@ -73,9 +73,12 @@ void loop(void)
                 radio.read( &p, sizeof(p) );
 
                 int16_t type = p.type;
+                if (type | 0x01 = 0x01) {
+                        //Type temperature
+                }
 
                 // Display it on screen
-                printf("Recv: size=%i pipe=%i type=%d address=%d",len,pipe,type,p.id);
+                printf("Recv: size=%i pipe=%i type=%d address=%d temperature=%.2f",len,pipe,type,p.id,p.temperature);
 
                 // Send back payload to sender
                 radio.stopListening();

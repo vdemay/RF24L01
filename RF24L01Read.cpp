@@ -72,13 +72,13 @@ void loop(void)
                 uint8_t len = radio.getDynamicPayloadSize();
                 radio.read( &p, sizeof(p) );
 
-                char outBuffer[1024]="";
+                char outBuffer[1024]="?1=1";
                 char temp[5];
-                if ((p.type | TEMPERATURE) == TEMPERATURE) { 
+                if ((p.type & TEMPERATURE) == TEMPERATURE) { 
                         strcat(outBuffer,"&Temperature=");
                         sprintf(temp, "%3.2f", p.val1);
                         strcat(outBuffer, temp);
-                } else if ((p.type | HUMIDITY) == HUMIDITY) { 
+                } else if ((p.type & HUMIDITY) == HUMIDITY) { 
                         
                 }
 

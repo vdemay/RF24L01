@@ -78,7 +78,7 @@ void loop(void)
                         strcat(outBuffer,"&Temperature=");
                         sprintf(temp, "%3.2f", p.val1);
                         strcat(outBuffer, temp);
-                } else if (p.type | HUMIDITY) == HUMIDITY) { 
+                } else if ((p.type | HUMIDITY) == HUMIDITY) { 
                         
                 }
 

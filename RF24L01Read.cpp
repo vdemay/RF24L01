@@ -116,7 +116,7 @@ void loop(char* serveur)
 
                 // Display it on screen
                 printf("Recv: size=%i pipe=%i type=%d address=%d data=%s",len,pipe,p.type,p.id,outBuffer);
-                //sendToServer(outBuffer);
+                sendToServer(outBuffer);
 
                 // Send back payload to sender
                 radio.stopListening();

@@ -13,6 +13,25 @@ const uint64_t pipes[6] = { 0x7365727631LL, 0xF0F0F0F0E1LL, 0xF0F0F0F0E2LL, 0xF0
 RF24 radio("/dev/spidev0.0",8000000,25);  // Setup for GPIO 25 CSN
 
 
+enum TYPES {
+  TEMPERATURE   = 0x01,
+  HUMIDITY      = 0x02,
+  CURRENT       = 0x04,
+  LUMINOSIRTY   = 0x08,
+};
+
+//DATA
+typedef struct {
+  int id;
+  int type;
+  float val1;
+  float val2;
+  float val3;
+  float val4;
+} Payload;
+Payload p;
+
+
 void setup(void)
 {
         //
@@ -51,10 +70,12 @@ void loop(void)
          while ( radio.available( &pipe ) ) {
 
                 uint8_t len = radio.getDynamicPayloadSize();
-                radio.read( receivePayload, len );
+                radio.read( &p, sizeof(p) );
+
+                int type = p.type;
 
                 // Display it on screen
-                printf("Recv: size=%i payload=%s pipe=%i",len,receivePayload,pipe);
+                printf("Recv: size=%i pipe=%i type=%s",len,pipe,type);
 
                 // Send back payload to sender
                 radio.stopListening();

@@ -72,6 +72,9 @@ void sendToServer(char* str)
  
     /* Perform the request, res will get the return code */ 
     res = curl_easy_perform(curl);
+
+    cout << res;
+
     /* Check for errors */ 
     if(res != CURLE_OK)
       fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));

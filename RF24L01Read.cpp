@@ -72,13 +72,18 @@ void loop(void)
                 uint8_t len = radio.getDynamicPayloadSize();
                 radio.read( &p, sizeof(p) );
 
-                int16_t type = p.type;
-                if ((type | 0x01) == 0x01) {
-                        //Type temperature
+                char outBuffer[1024]="";
+                char temp[5];
+                if ((p.type | TEMPERATURE) == TEMPERATURE) { 
+                        strcat(outBuffer,"&Temperature=");
+                        sprintf(temp, "%3.2f", p.val1);
+                        strcat(outBuffer, temp);
+                } else if (p.type | HUMIDITY) == HUMIDITY) { 
+                        
                 }
 
                 // Display it on screen
-                printf("Recv: size=%i pipe=%i type=%d address=%d temperature=%.2f",len,pipe,type,p.id,p.val1);
+                printf("Recv: size=%i pipe=%i type=%d address=%d data=%s",len,pipe,type,p.id,outBuffer);
 
                 // Send back payload to sender
                 radio.stopListening();

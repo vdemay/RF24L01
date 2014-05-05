@@ -24,10 +24,7 @@ enum TYPES {
 typedef struct {
   int16_t id;
   int16_t type;
-  float val1;
-  float val2;
-  float val3;
-  float val4;
+  float val[10];
 } Payload;
 Payload p;
 
@@ -74,12 +71,15 @@ void loop(void)
 
                 char outBuffer[1024]="?1=1";
                 char temp[5];
+                val = 0;
                 if ((p.type & TEMPERATURE) == TEMPERATURE) { 
-                        strcat(outBuffer,"&Temperature=");
-                        sprintf(temp, "%3.2f", p.val1);
+                        strcat(outBuffer,"&temperature=");
+                        sprintf(temp, "%3.2f", p.val[val++]);
                         strcat(outBuffer, temp);
                 } else if ((p.type & HUMIDITY) == HUMIDITY) { 
-                        
+                        strcat(outBuffer,"&humidity=");
+                        sprintf(temp, "%3.2f", p.val[val++]);
+                        strcat(outBuffer, temp);
                 }
 
                 // Display it on screen

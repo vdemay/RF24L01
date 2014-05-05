@@ -92,12 +92,13 @@ void loop(char* serveur)
                 uint8_t len = radio.getDynamicPayloadSize();
                 radio.read( &p, sizeof(p) );
 
+                char temp[5];
+                
                 char outBuffer[1024]="";
                 strcat(outBuffer, serveur);
                 strcat(outBuffer, "?id=");
                 sprintf(temp, "%d", p.id);
                 strcat(outBuffer, temp);
-                char temp[5];
                 int val = 0;
                 if ((p.type & TEMPERATURE) == TEMPERATURE) { 
                         strcat(outBuffer,"&temperature=");

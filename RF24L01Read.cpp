@@ -73,7 +73,7 @@ void loop(void)
                 radio.read( &p, sizeof(p) );
 
                 int16_t type = p.type;
-                if (type | 0x01 = 0x01) {
+                if (type | 0x01 == 0x01) {
                         //Type temperature
                 }
 

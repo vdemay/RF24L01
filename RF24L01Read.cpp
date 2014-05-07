@@ -15,11 +15,11 @@ RF24 radio("/dev/spidev0.0",8000000,25);  // Setup for GPIO 25 CSN
 
 
 enum TYPES {
-  TEMPERATURE   = 0x01,
-  HUMIDITY      = 0x02,
-  CURRENT       = 0x04,
-  LUMINOSITY    = 0x08,
-  PRESSURE      = 0x16,
+  TEMPERATURE   = 1,
+  HUMIDITY      = 2,
+  CURRENT       = 4,
+  LUMINOSITY    = 8,
+  PRESSURE      = 16,
 };
 
 //DATA

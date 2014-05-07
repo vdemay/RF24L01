@@ -18,7 +18,8 @@ enum TYPES {
   TEMPERATURE   = 0x01,
   HUMIDITY      = 0x02,
   CURRENT       = 0x04,
-  LUMINOSITY   = 0x08,
+  LUMINOSITY    = 0x08,
+  PRESSURE      = 0x16,
 };
 
 //DATA
@@ -110,6 +111,21 @@ void loop(char* serveur)
                 }
                 if ((p.type & HUMIDITY) == HUMIDITY) { 
                         strcat(outBuffer,"&humidity=");
+                        sprintf(temp, "%3.2f", p.val[val++]);
+                        strcat(outBuffer, temp);
+                }
+                if ((p.type & CURRENT) == CURRENT) { 
+                        strcat(outBuffer,"&current=");
+                        sprintf(temp, "%3.2f", p.val[val++]);
+                        strcat(outBuffer, temp);
+                }
+                if ((p.type & LUMINOSITY) == LUMINOSITY) { 
+                        strcat(outBuffer,"&luminosity=");
+                        sprintf(temp, "%3.2f", p.val[val++]);
+                        strcat(outBuffer, temp);
+                }
+                if ((p.type & PRESSURE) == PRESSURE) { 
+                        strcat(outBuffer,"&pressure=");
                         sprintf(temp, "%3.2f", p.val[val++]);
                         strcat(outBuffer, temp);
                 }

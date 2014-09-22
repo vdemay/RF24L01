@@ -67,9 +67,10 @@ void sendToServer(char* str)
  
   curl = curl_easy_init();
   if(curl) {
-    curl_easy_setopt(curl, CURLOPT_URL, str);
+    curl_easy_setopt(curl, CURLOPT_URL, "https://api.thingspeak.com/update");
     /* example.com is redirected, so we tell libcurl to follow redirection */ 
     curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, str);
  
     /* Perform the request, res will get the return code */ 
     res = curl_easy_perform(curl);
@@ -85,7 +86,7 @@ void sendToServer(char* str)
   }
 }
 
-void loop(char* serveur)
+void loop(char* key)
 {
         char receivePayload[32];
         uint8_t pipe = 0;
@@ -99,7 +100,9 @@ void loop(char* serveur)
                 char temp[5];
 
                 char outBuffer[1024]="";
-                strcat(outBuffer, serveur);
+                strcat(outBuffer, "");
+                strcat(outBuffer, "key=");
+                strcat(outBuffer, key);
                 strcat(outBuffer, "?id=");
                 sprintf(temp, "%d", p.id);
                 strcat(outBuffer, temp);

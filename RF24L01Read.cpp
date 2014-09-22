@@ -103,32 +103,32 @@ void loop(char* key)
                 strcat(outBuffer, "");
                 strcat(outBuffer, "key=");
                 strcat(outBuffer, key);
-                strcat(outBuffer, "?id=");
+                strcat(outBuffer, "&id=");
                 sprintf(temp, "%d", p.id);
                 strcat(outBuffer, temp);
                 int val = 0;
                 if ((p.type & TEMPERATURE) == TEMPERATURE) { 
-                        strcat(outBuffer,"&temperature=");
+                        strcat(outBuffer,"&1=");
                         sprintf(temp, "%3.2f", p.val[val++]);
                         strcat(outBuffer, temp);
                 }
                 if ((p.type & HUMIDITY) == HUMIDITY) { 
-                        strcat(outBuffer,"&humidity=");
+                        strcat(outBuffer,"&2=");
                         sprintf(temp, "%3.2f", p.val[val++]);
                         strcat(outBuffer, temp);
                 }
                 if ((p.type & CURRENT) == CURRENT) { 
-                        strcat(outBuffer,"&current=");
+                        strcat(outBuffer,"&3=");
                         sprintf(temp, "%3.2f", p.val[val++]);
                         strcat(outBuffer, temp);
                 }
                 if ((p.type & LUMINOSITY) == LUMINOSITY) { 
-                        strcat(outBuffer,"&luminosity=");
+                        strcat(outBuffer,"&4=");
                         sprintf(temp, "%3.2f", p.val[val++]);
                         strcat(outBuffer, temp);
                 }
                 if ((p.type & PRESSURE) == PRESSURE) { 
-                        strcat(outBuffer,"&pressure=");
+                        strcat(outBuffer,"&6=");
                         sprintf(temp, "%3.2f", p.val[val++]);
                         strcat(outBuffer, temp);
                 }

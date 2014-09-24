@@ -25,7 +25,7 @@ enum TYPES {
 //DATA
 typedef struct {
   // id of the device -> max is 16 characters
-  int16_t id;
+  char id;
   // type of the device -> a simple int
   int16_t type;
   //data

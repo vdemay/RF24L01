@@ -134,7 +134,7 @@ void loop()
                 }
 
                 // Display it on screen
-                printf("Recv: size=%i pipe=%i type=%d data=%s",len,pipe,p.type,outBuffer);
+                printf("\n\rRecv: size=%i pipe=%i type=%d data=%s\n\r",len,pipe,p.type,outBuffer);
                 sendToServer(outBuffer);
 
                 // Send back payload to sender

@@ -20,13 +20,17 @@ enum TYPES {
   CURRENT       = 4,
   LUMINOSITY    = 8,
   PRESSURE      = 16,
+  GAZ           = 32
 };
 
 //DATA
 typedef struct {
-  int16_t id;
+  // id of the device -> max is 32 characters
+  char id[32];
+  // type of the device -> a simple int
   int16_t type;
-  float val[10];
+  // table of value -> 8 values max
+  float val[8];
 } Payload;
 Payload p;
 
@@ -68,7 +72,7 @@ void sendToServer(char* str)
   curl = curl_easy_init();
   if(curl) {
     curl_easy_setopt(curl, CURLOPT_URL, "https://api.thingspeak.com/update");
-    /* example.com is redirected, so we tell libcurl to follow redirection */ 
+    /* Tell libcurl to follow redirection */ 
     curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
     curl_easy_setopt(curl, CURLOPT_POSTFIELDS, str);
  
@@ -86,7 +90,7 @@ void sendToServer(char* str)
   }
 }
 
-void loop(char* key)
+void loop()
 {
         char receivePayload[32];
         uint8_t pipe = 0;
@@ -101,11 +105,8 @@ void loop(char* key)
 
                 char outBuffer[1024]="";
                 strcat(outBuffer, "");
-                strcat(outBuffer, "key=");
-                strcat(outBuffer, key);
-                strcat(outBuffer, "&id=");
-                sprintf(temp, "%d", p.id);
-                strcat(outBuffer, temp);
+                strcat(outBuffer, "id=");
+                strcat(outBuffer, p.id);
                 int val = 0;
                 if ((p.type & TEMPERATURE) == TEMPERATURE) { 
                         strcat(outBuffer,"&1=");
@@ -129,6 +130,11 @@ void loop(char* key)
                 }
                 if ((p.type & PRESSURE) == PRESSURE) { 
                         strcat(outBuffer,"&6=");
+                        sprintf(temp, "%3.2f", p.val[val++]);
+                        strcat(outBuffer, temp);
+                }
+                if ((p.type & GAZ) == GAZ) { 
+                        strcat(outBuffer,"&7=");
                         sprintf(temp, "%3.2f", p.val[val++]);
                         strcat(outBuffer, temp);
                 }
@@ -165,14 +171,8 @@ void loop(char* key)
 
 int main(int argc, char** argv) 
 {
-        if (argc <= 1)
-        {
-                cout << "Usage: " << argv[0] << " <Serveur>" << endl;
-                exit(1);
-        }
-        setup();
         while(1)
-                loop(argv[1]);
+                loop();
         
         return 0;
 }

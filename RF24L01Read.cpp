@@ -104,12 +104,12 @@ void loop()
 
                 char outBuffer[1024]="";
                 strcat(outBuffer, "");
-                strcat(outBuffer, "id=");
+                strcat(outBuffer, "key=");
                 strcat(outBuffer, p.id);
                 int val = 0;
                 if ((p.type & TEMPERATURE) == TEMPERATURE) { 
                         strcat(outBuffer,"&1=");
-                        printf("%3.2f", p.val[val++]);
+                        printf("%3.2f", p.val[0]);
                         sprintf(temp, "%3.2f", p.val[val++]);
                         strcat(outBuffer, temp);
                 }

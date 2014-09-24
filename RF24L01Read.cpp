@@ -29,7 +29,6 @@ typedef struct {
   char id[32];
   // type of the device -> a simple int
   int16_t type;
-  // table of value -> 8 values max
   float val[8];
 } Payload;
 Payload p;
@@ -140,7 +139,7 @@ void loop()
                 }
 
                 // Display it on screen
-                printf("Recv: size=%i pipe=%i type=%d address=%d data=%s",len,pipe,p.type,p.id,outBuffer);
+                printf("Recv: size=%i pipe=%i type=%d data=%s",len,pipe,p.type,outBuffer);
                 sendToServer(outBuffer);
 
                 // Send back payload to sender

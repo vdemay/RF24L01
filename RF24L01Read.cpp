@@ -170,8 +170,9 @@ void loop()
 
 int main(int argc, char** argv) 
 {
-        while(1)
-                loop();
+    setup();
+    while(1)
+        loop();
         
-        return 0;
+    return 0;
 }

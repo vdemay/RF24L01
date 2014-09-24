@@ -19,8 +19,7 @@ enum TYPES {
   HUMIDITY      = 2,
   CURRENT       = 4,
   LUMINOSITY    = 8,
-  PRESSURE      = 16,
-  GAZ           = 32
+  PRESSURE      = 16
 };
 
 //DATA
@@ -130,11 +129,6 @@ void loop()
                 }
                 if ((p.type & PRESSURE) == PRESSURE) { 
                         strcat(outBuffer,"&6=");
-                        sprintf(temp, "%3.2f", p.val[val++]);
-                        strcat(outBuffer, temp);
-                }
-                if ((p.type & GAZ) == GAZ) { 
-                        strcat(outBuffer,"&7=");
                         sprintf(temp, "%3.2f", p.val[val++]);
                         strcat(outBuffer, temp);
                 }

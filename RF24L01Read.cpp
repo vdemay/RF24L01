@@ -25,7 +25,7 @@ enum TYPES {
 //DATA
 typedef struct {
   // id of the device -> max is 16 characters
-  char id[1];
+  int16_t id;
   // type of the device -> a simple int
   int16_t type;
   //data
@@ -105,7 +105,7 @@ void loop()
                 char outBuffer[1024]="";
                 strcat(outBuffer, "");
                 strcat(outBuffer, "key=");
-                strcat(outBuffer, p.id);
+                //strcat(outBuffer, p.id);
                 int val = 0;
                 if ((p.type & TEMPERATURE) == TEMPERATURE) { 
                         strcat(outBuffer,"&1=");

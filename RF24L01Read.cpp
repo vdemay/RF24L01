@@ -25,11 +25,11 @@ enum TYPES {
 //DATA
 typedef struct {
   // id of the device -> max is 16 characters
-  int16_t id[1];
+  char id[16];
   // type of the device -> a simple int
-  uint16_t type;
+  int8_t type;
   //data
-  float val[8];
+  int16_t val[8];
 } Payload;
 Payload p;
 
@@ -105,32 +105,32 @@ void loop()
                 char outBuffer[1024]="";
                 strcat(outBuffer, "");
                 strcat(outBuffer, "key=");
-                //strcat(outBuffer, p.id);
+                strcat(outBuffer, p.id);
                 int val = 0;
                 if ((p.type & TEMPERATURE) == TEMPERATURE) { 
                         strcat(outBuffer,"&1=");
-                        printf("%3.2f", p.val[0]);
-                        sprintf(temp, "%3.2f", p.val[val++]);
+                        printf("%3.2f", p.val[0]/100.0);
+                        sprintf(temp, "%3.2f", p.val[val++]/100.0);
                         strcat(outBuffer, temp);
                 }
                 if ((p.type & HUMIDITY) == HUMIDITY) { 
                         strcat(outBuffer,"&2=");
-                        sprintf(temp, "%3.2f", p.val[val++]);
+                        sprintf(temp, "%3.2f", p.val[val++]/100.0);
                         strcat(outBuffer, temp);
                 }
                 if ((p.type & CURRENT) == CURRENT) { 
                         strcat(outBuffer,"&3=");
-                        sprintf(temp, "%3.2f", p.val[val++]);
+                        sprintf(temp, "%3.2f", p.val[val++]/100.0);
                         strcat(outBuffer, temp);
                 }
                 if ((p.type & LUMINOSITY) == LUMINOSITY) { 
                         strcat(outBuffer,"&4=");
-                        sprintf(temp, "%3.2f", p.val[val++]);
+                        sprintf(temp, "%3.2f", p.val[val++]/100.0);
                         strcat(outBuffer, temp);
                 }
                 if ((p.type & PRESSURE) == PRESSURE) { 
                         strcat(outBuffer,"&6=");
-                        sprintf(temp, "%3.2f", p.val[val++]);
+                        sprintf(temp, "%3.2f", p.val[val++]/100.0);
                         strcat(outBuffer, temp);
                 }
 

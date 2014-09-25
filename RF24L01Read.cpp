@@ -27,7 +27,7 @@ typedef struct {
   // id of the device -> max is 16 characters
   char id[16];
   // type of the device -> a simple int
-  int8_t type;
+  int16_t type;
   //data
   int16_t val[7];
 } Payload;

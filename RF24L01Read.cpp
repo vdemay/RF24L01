@@ -29,7 +29,7 @@ typedef struct {
   // type of the device -> a simple int
   int8_t type;
   //data
-  int16_t val[8];
+  int16_t val[7];
 } Payload;
 Payload p;
 
@@ -135,7 +135,7 @@ void loop()
                 }
 
                 // Display it on screen
-                printf("\n\rRecv: size=%i pipe=%i type=%d data=%s\n\r",len,pipe,p.type,outBuffer);
+                printf("\n\rRecv: size:%i pipe:%i type:%d data:%s\n\r",len,pipe,p.type,outBuffer);
                 sendToServer(outBuffer);
 
                 // Send back payload to sender

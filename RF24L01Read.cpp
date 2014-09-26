@@ -109,7 +109,6 @@ void loop()
                 int val = 0;
                 if ((p.type & TEMPERATURE) == TEMPERATURE) { 
                         strcat(outBuffer,"&1=");
-                        printf("%d", p.val[0]);
                         sprintf(temp, "%3.2f", p.val[val++]/100.0);
                         strcat(outBuffer, temp);
                 }

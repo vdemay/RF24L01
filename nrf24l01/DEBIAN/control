@@ -1,0 +1,8 @@
+Package: nrf24l01
+Version: 1.0
+Section: base
+Priority: optional
+Architecture: Raspberry Pi
+Depends: bash
+Maintainer: Vincent Demay
+Description: Handle nrf24l01 payload and send to internet

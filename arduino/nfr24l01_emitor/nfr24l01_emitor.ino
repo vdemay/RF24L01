@@ -43,7 +43,6 @@ RF24 radio(9,10);
 const uint64_t pipes[2] = { 0xF0F0F0F0E1LL, 0x7365727631LL };
 
 char receivePayload[32];
-uint8_t counter=0;
 
 //count number of entering into main loop
 uint8_t loopCounter=500;  

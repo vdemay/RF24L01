@@ -155,6 +155,7 @@ void sendOverRadio() {
   // Send to hub
   if ( radio.write(&p, sizeof(p)) ) {
     //Serial.println("Send successful\n\r");
+    send_time = millis();
   } else {
     //Serial.println("Send failed\n\r");
   }
